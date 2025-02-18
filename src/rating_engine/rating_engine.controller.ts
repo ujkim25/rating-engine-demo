@@ -1,13 +1,22 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Post } from '@nestjs/common';
+import { ApiTags, ApiOperation, ApiBody, ApiResponse } from '@nestjs/swagger';
 import { RatingEngineDto } from './rating_engine.dto';
 import { RatingEngineService } from './rating_engine.service';
 import { RadarLiveResponse } from './rating_engine.interface';
 
+@ApiTags('RatingEngine') // Swagger에서 이 컨트롤러를 'RatingEngine' 태그로 분류
 @Controller('rating-engine')
 export class RatingEngineController {
     constructor(private readonly ratingEngineService: RatingEngineService) {}
 
     @Post()
+    @ApiOperation({ summary: 'Underwriting & Premium Calculation' })
+    @ApiBody({ type: RatingEngineDto }) // 요청 Body에 RatingEngineDto가 온다는 점을 명시
+    @ApiResponse({
+        status: 200,
+        description: 'Successfully processed the underwriting & premium calculation',
+        type: RatingEngineDto,
+    })
     async uwCalculate(@Body() dto: RatingEngineDto): Promise<RatingEngineDto> {
         if (dto["ins-rank"] === "Officer") {
             return this.uwDeclined(dto);
