@@ -8,7 +8,7 @@ import { lastValueFrom } from 'rxjs';
 export class RatingEngineService {
     constructor(private readonly httpService: HttpService) {}
 
-    async computePremiumFake(dto: RatingEngineDto) {
+    async computePremiumMock(dto: RatingEngineDto): Promise<number> {
         const total_premium = dto.prm_medpay_limit*1.2;
         return total_premium;
     }
