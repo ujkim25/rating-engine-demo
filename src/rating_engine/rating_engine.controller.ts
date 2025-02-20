@@ -18,7 +18,7 @@ export class RatingEngineController {
         type: RatingEngineDto,
     })
     async uwCalculate(@Body() dto: RatingEngineDto): Promise<RatingEngineDto> {
-        if (dto["ins-rank"] === "Officer") {
+        if (dto.ins_rank === "Officer") {
             return this.uwDeclined(dto);
         }else {
             return this.uwAccepted(dto);
@@ -27,7 +27,7 @@ export class RatingEngineController {
 
     uwDeclined(dto: RatingEngineDto) {
         dto.uw_status = "Declined";
-        dto.uw_message = `${dto["ins-rank"]} can not be covered!`;
+        dto.uw_message = `${dto.ins_rank} can not be covered!`;
         return dto;
     }
 

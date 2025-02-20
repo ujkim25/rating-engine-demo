@@ -32,10 +32,10 @@ export class RatingEngineDto {
   ins_factor: string;
 
   @ApiProperty()
-  "ins-marital": string;
+  ins_marital: string;
 
   @ApiProperty()
-  "ins-rank": string;
+  ins_rank: string;
 
   @ApiProperty()
   ins_tel_home: string;
