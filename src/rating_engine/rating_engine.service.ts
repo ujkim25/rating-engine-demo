@@ -22,7 +22,7 @@ export class RatingEngineService {
             'Content-Type': 'application/json'
         };
 
-        const data = this.mapToLadarLiveRequest(dto);
+        const data = this.mapToRadarLiveRequest(dto);
 
         // body에 data를 그대로 전송한다고 가정 (Radar Live가 요구하는 필드명에 맞춰 매핑해야 함)
         try {
@@ -42,7 +42,7 @@ export class RatingEngineService {
         }
     }
 
-    mapToLadarLiveRequest(dto: RatingEngineDto): RadarLiveRequest {
+    mapToRadarLiveRequest(dto: RatingEngineDto): RadarLiveRequest {
         return {
             age: dto.ins_age,
             yearModel: dto.veh_year_model,
