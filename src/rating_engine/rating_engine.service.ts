@@ -3,6 +3,7 @@ import { RatingEngineDto } from './rating_engine.dto';
 import { RadarLiveResponse } from './rating_engine.interface';
 import { HttpService } from '@nestjs/axios';
 import { lastValueFrom } from 'rxjs';
+import { RadarLiveRequest } from './radar_live_request.interface';
 
 @Injectable()
 export class RatingEngineService {
@@ -13,14 +14,15 @@ export class RatingEngineService {
         return total_premium;
     }
 
-    /*
-    async computePremium(data: RatingEngineDto): Promise<RadarLiveResponse> {
+    async computePremium(dto: RatingEngineDto): Promise<RadarLiveResponse> {
         // Radar Live API 문서에 따라, POST URL / 파라미터 / 헤더 설정
-        const url = 'https://api.radar.live/v1/calculate-insurance';
+        const url = 'https://radar-live-mockup.onrender.com/compute-premium';
         const headers = {
-            Authorization: 'Bearer YOUR_RADAR_LIVE_API_KEY',
+            // Authorization: 'Bearer YOUR_RADAR_LIVE_API_KEY',
             'Content-Type': 'application/json'
         };
+
+        const data = this.mapToLadarLiveRequest(dto);
 
         // body에 data를 그대로 전송한다고 가정 (Radar Live가 요구하는 필드명에 맞춰 매핑해야 함)
         try {
@@ -39,5 +41,12 @@ export class RatingEngineService {
             throw error;
         }
     }
-    */
+
+    mapToLadarLiveRequest(dto: RatingEngineDto): RadarLiveRequest {
+        return {
+            age: dto.ins_age,
+            yearModel: dto.veh_year_model,
+            medicalPayments: dto.prm_medpay_limit,
+        };
+    }
 }
