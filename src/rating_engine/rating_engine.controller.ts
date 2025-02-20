@@ -13,7 +13,7 @@ export class RatingEngineController {
     @ApiOperation({ summary: 'Underwriting & Premium Calculation' })
     @ApiBody({ type: RatingEngineDto }) // 요청 Body에 RatingEngineDto가 온다는 점을 명시
     @ApiResponse({
-        status: 200,
+        status: 201,
         description: 'Successfully processed the underwriting & premium calculation',
         type: RatingEngineDto,
     })
