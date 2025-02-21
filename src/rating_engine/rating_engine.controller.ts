@@ -34,7 +34,7 @@ export class RatingEngineController {
 
     async uwAccepted(dto: RatingEngineDto) {
         dto.uw_status = "Accepted"
-        dto.uw_message = "";
+        dto.uw_message = "Passed Underwriting";
         const radarLiveResponse: RadarLiveResponse = await this.ratingEngineService.computePremium(dto);
         // 만약 **await**을 쓰지 않으면, computeInsurance()이 반환하는 Promise 객체만 받게 되고, 실제 결과값을 확인하기 위해서는 .then()이나 콜백으로 접근해야 합니다.
         dto.prm_total_premium = radarLiveResponse.totalPremium;
