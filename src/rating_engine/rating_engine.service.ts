@@ -16,7 +16,7 @@ export class RatingEngineService {
 
     async computePremium(dto: RatingEngineDto): Promise<RadarLiveResponse> {
         // Radar Live API 문서에 따라, POST URL / 파라미터 / 헤더 설정
-        const url = process.env.RADAR_LIVE_URL || 'https://radar-live-mockup.onrender.com/compute-premium';
+        const url = process.env.RADAR_LIVE_URL || 'http://localhost:4000/compute-premium';
         const headers = {
             // Authorization: 'Bearer YOUR_RADAR_LIVE_API_KEY',
             'Content-Type': 'application/json'
