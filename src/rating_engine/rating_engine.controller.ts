@@ -27,19 +27,21 @@ export class RatingEngineController {
     }
 
     uwDeclined(dto: RatingEngineDto) {
-        dto.uw_status = "Declined";
-        dto.uw_message = `${dto.ins_rank} can not be covered!`;
-        return dto;
+        const result = { ...dto };
+        result.uw_status = "Declined";
+        result.uw_message = `${result.ins_rank} can not be covered!`;
+        return result;
     }
 
     async uwAccepted(dto: RatingEngineDto) {
-        dto.uw_status = "Accepted"
-        dto.uw_message = "Passed Underwriting";
+        const result = { ...dto }; // 얕은 복사: 원본 dto의 속성들을 복사하여 새로운 객체 생성
+        result.uw_status = "Accepted"; // 새로운 객체에 상태 업데이트
+        result.uw_message = "Passed Underwriting"; // 메시지 업데이트
         const radarLiveResponse: RadarLiveResponse = await this.ratingEngineService.computePremium(dto);
         // 만약 **await**을 쓰지 않으면, computeInsurance()이 반환하는 Promise 객체만 받게 되고, 실제 결과값을 확인하기 위해서는 .then()이나 콜백으로 접근해야 합니다.
-        dto.prm_total_premium = radarLiveResponse.totalPremium;
-        dto.prm_net_premium = radarLiveResponse.netPremium;
-        dto.prm_gross_premium = radarLiveResponse.grossPremium;
-        return dto;
+        result.prm_total_premium = radarLiveResponse.totalPremium;
+        result.prm_net_premium = radarLiveResponse.netPremium;
+        result.prm_gross_premium = radarLiveResponse.grossPremium;
+        return result;
     }
 }
