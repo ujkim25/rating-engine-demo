@@ -19,6 +19,7 @@ export class RatingEngineController {
         type: RatingEngineDto,
     })
     async uwCalculate(@Body() dto: RatingEngineDto): Promise<RatingEngineDto> {
+        console.log("Performing UW");
         if (dto.ins_rank === "Officer") {
             return this.uwDeclined(dto);
         }else {
