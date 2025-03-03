@@ -21,8 +21,10 @@ export class RatingEngineController {
     async uwCalculate(@Body() dto: RatingEngineDto): Promise<RatingEngineDto> {
         console.log("Performing UW");
         if (dto.ins_rank === "Officer") {
+            console.log("Officer");
             return this.uwDeclined(dto);
         }else {
+            console.log("non-officer");
             return this.uwAccepted(dto);
         }
     }
@@ -38,6 +40,7 @@ export class RatingEngineController {
         const result = { ...dto }; // 얕은 복사: 원본 dto의 속성들을 복사하여 새로운 객체 생성
         result.uw_status = "Accepted"; // 새로운 객체에 상태 업데이트
         result.uw_message = "Passed Underwriting"; // 메시지 업데이트
+        console.log("calling mock up");
         const radarLiveResponse: RadarLiveResponse = await this.ratingEngineService.computePremium(dto);
         // 만약 **await**을 쓰지 않으면, computeInsurance()이 반환하는 Promise 객체만 받게 되고, 실제 결과값을 확인하기 위해서는 .then()이나 콜백으로 접근해야 합니다.
         result.prm_total_premium = radarLiveResponse.totalPremium;
