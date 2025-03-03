@@ -19,7 +19,8 @@ export class RatingEngineService {
         const url = process.env.RADAR_LIVE_URL || 'https://mock.thekitchen.work/compute-premium';
         const headers = {
             // Authorization: 'Bearer YOUR_RADAR_LIVE_API_KEY',
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            "Access-Control-Allow-Origin":'*'
         };
 
         const data = this.mapToRadarLiveRequest(dto);
