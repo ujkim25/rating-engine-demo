@@ -26,6 +26,7 @@ export class RatingEngineService {
 
         // body에 data를 그대로 전송한다고 가정 (Radar Live가 요구하는 필드명에 맞춰 매핑해야 함)
         try {
+            console.log("posting");
             const response$ = this.httpService.post(url, data, { headers });
             //NestJS의 HttpService(구 @nestjs/axios)는 기본적으로 RxJS Observable을 반환합니다.
             //여기서 response$는 Observable 객체로, 아직 실제 네트워크 요청이 완료된 상태가 아닙니다.
