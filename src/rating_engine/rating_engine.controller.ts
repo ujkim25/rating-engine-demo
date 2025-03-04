@@ -56,9 +56,15 @@ export class RatingEngineController {
         console.log("calling mock up");
         const radarLiveResponse: RadarLiveResponse = await this.ratingEngineService.computePremium(dto);
         // 만약 **await**을 쓰지 않으면, computeInsurance()이 반환하는 Promise 객체만 받게 되고, 실제 결과값을 확인하기 위해서는 .then()이나 콜백으로 접근해야 합니다.
-        result.prm_total_premium = radarLiveResponse.totalPremium;
-        result.prm_net_premium = radarLiveResponse.netPremium;
-        result.prm_gross_premium = radarLiveResponse.grossPremium;
+        result.prm_comp_premium = radarLiveResponse.prm_comp_premium;
+        result.prm_coll_premium = radarLiveResponse.prm_coll_premium;
+        result.prm_loss_premium = radarLiveResponse.prm_loss_premium;
+        result.prm_bi_premium = radarLiveResponse.prm_bi_premium;
+        result.prm_pd_premium = radarLiveResponse.prm_pd_premium;
+        result.prm_medpay_premium = radarLiveResponse.prm_medpay_premium;
+        result.prm_gross_premium = radarLiveResponse.prm_gross_premium;
+        result.prm_net_premium = radarLiveResponse.prm_net_premium;
+        result.prm_total_premium = radarLiveResponse.prm_total_premium;
         return result;
     }
 }
