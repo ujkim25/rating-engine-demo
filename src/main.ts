@@ -19,6 +19,6 @@ async function bootstrap() {
   // 이렇게 하면, https://rating-engine-demo.onrender.com/api-docs 에 접속하면 API 문서를 볼 수 있습니다.
   
   app.enableCors();
-  await app.listen(process.env.PORT ?? 3000);
+  await app.listen(process.env.PORT ?? 4000);
 }
 bootstrap();
