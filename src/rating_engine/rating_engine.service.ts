@@ -9,11 +9,6 @@ import { RadarLiveRequest } from './radar_live_request.interface';
 export class RatingEngineService {
     constructor(private readonly httpService: HttpService) {}
 
-    async computePremiumMock(dto: RatingEngineDto): Promise<number> {
-        const total_premium = dto.prm_medpay_limit*1.2;
-        return total_premium;
-    }
-
     async computePremium(dto: RatingEngineDto): Promise<RadarLiveResponse> {
         // Radar Live API 문서에 따라, POST URL / 파라미터 / 헤더 설정
         const url = process.env.RADAR_LIVE_URL || 'https://mock.thekitchen.work/compute-premium';

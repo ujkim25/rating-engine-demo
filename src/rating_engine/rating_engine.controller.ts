@@ -20,19 +20,32 @@ export class RatingEngineController {
     })
     async uwCalculate(@Body() dto: RatingEngineDto): Promise<RatingEngineDto> {
         console.log("Performing UW");
-        if (dto.ins_rank === "Officer") {
-            console.log("Officer");
-            return this.uwDeclined(dto);
+        const message: string[] = [];
+        const rank: string[] = ['E5', 'E6', 'E7', 'E8', 'E9', 'Officer'];
+
+        if (dto.ins_age < 21) {
+            message.push(`${dto.ins_age} can not be covered!;`);
+        }
+        if (dto.veh_year_model < 1970) {
+            message.push(`${dto.veh_year_model} can not be covered!;`);
+        }
+        if (!rank.includes(dto.ins_rank)) {
+            message.push(`${dto.ins_rank} can not be covered!;`);
+        }
+
+        if (message.length > 0) {
+            console.log("UW Declined");
+            return this.uwDeclined(dto, message);
         }else {
-            console.log("non-officer");
+            console.log("UW Accepted");
             return this.uwAccepted(dto);
         }
     }
 
-    uwDeclined(dto: RatingEngineDto) {
+    uwDeclined(dto: RatingEngineDto, message: string[]) {
         const result = { ...dto };
         result.uw_status = "Declined";
-        result.uw_message = `${result.ins_rank} can not be covered!`;
+        result.uw_message = message.join(' ')
         return result;
     }
 
