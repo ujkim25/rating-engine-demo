@@ -46,9 +46,14 @@ export class RatingEngineService {
 
     mapToRadarLiveRequest(dto: RatingEngineDto): RadarLiveRequest {
         return {
-            age: dto.ins_age,
-            yearModel: dto.veh_year_model,
-            medicalPayments: dto.prm_medpay_limit,
+            prm_comp_ded: Number(dto.prm_comp_ded),
+            prm_comp_limit: dto.prm_comp_limit,
+            prm_coll_ded: Number(dto.prm_coll_ded),
+            prm_coll_limit: dto.prm_coll_limit,
+            prm_loss_limit: dto.prm_loss_limit,
+            prm_bi_limit: dto.prm_bi_limit,
+            prm_pd_limit: dto.prm_pd_limit,
+            prm_medpay_limit: dto.prm_medpay_limit,
         };
     }
 }
